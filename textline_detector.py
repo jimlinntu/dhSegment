@@ -50,7 +50,8 @@ class TextLineDetector():
                 plt.imshow(textline_probs)
                 plt.savefig(str(self.debug_dir / "textline_probability.png"))
 
-            textline_probs2 = cleaning_probs(textline_probs, sigma=2)
+            # The higher the sigma, the less number of textlines we have
+            textline_probs2 = cleaning_probs(textline_probs, sigma=1)
             textline_mask = hysteresis_thresholding(textline_probs2, low_threshold=0.3, high_threshold=0.6, candidates_mask=None)
             if self.debug:
                 plt.imshow(textline_mask)
